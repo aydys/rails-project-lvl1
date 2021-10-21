@@ -1,10 +1,18 @@
 # frozen_string_literal: true
 
 require_relative 'hexlet_code/version'
+require_relative 'hexlet_code/user'
 
+# main module
 module HexletCode
   class Error < StandardError; end
   # Your code goes here...
+
+  def form_for(_user, **hash)
+    path = hash[:url] || '#'
+    "<form action=\"#{path}\" method=\"post\"></form>"
+  end
+  module_function :form_for
 
   # create a html element
   module Tag

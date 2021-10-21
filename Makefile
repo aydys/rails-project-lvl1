@@ -2,4 +2,4 @@ install:
 	bundle install
 
 run_linter:
-	rubocop
+	rubocop --require rubocop-minitest
