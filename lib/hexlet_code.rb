@@ -2,15 +2,22 @@
 
 require_relative 'hexlet_code/version'
 require_relative 'hexlet_code/user'
+require_relative 'hexlet_code/form_field'
 
 # main module
 module HexletCode
   class Error < StandardError; end
   # Your code goes here...
 
-  def form_for(_user, **hash)
+  def form_for(user, **hash)
+    inputs = ''
+    if block_given?
+      form_fields = FormFields.new user
+      yield form_fields
+      inputs = form_fields.acc
+    end
     path = hash[:url] || '#'
-    "<form action=\"#{path}\" method=\"post\"></form>"
+    "<form action=\"#{path}\" method=\"post\">#{inputs}</form>"
   end
   module_function :form_for
 
