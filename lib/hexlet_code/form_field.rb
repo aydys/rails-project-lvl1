@@ -12,11 +12,16 @@ module HexletCode
 
     def input(name, **hash)
       @user.public_send(name)
+      label = +"<label for=\"#{name}\">#{name.capitalize}</label>"
       @acc << if hash.key? :as
-                "<textarea cols=\"20\" rows=\"40\" name=\"#{name}\">#{@user[name]}</textarea>"
+                "#{label}<textarea cols=\"20\" rows=\"40\" name=\"#{name}\">#{@user[name]}</textarea>"
               else
-                "<input name=\"#{name}\" type=\"text\" value=\"#{@user[name]}\">"
+                "#{label}<input name=\"#{name}\" type=\"text\" value=\"#{@user[name]}\">"
               end
+    end
+
+    def submit(value = 'Save')
+      @acc << "<input name=\"commit\" type=\"submit\" value=\"#{value}\" >"
     end
   end
 end
