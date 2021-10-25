@@ -46,6 +46,19 @@ class HexletCodeTest < Minitest::Test
     )
   end
 
+  def test_that_created_textarea_with_options
+    form = HexletCode.form_for @user do |f|
+      f.input :job, as: :text, cols: 50, rows: 50
+    end
+
+    assert_equal(
+      form,
+      '<form action="#" method="post">'\
+        '<label for="job">Job</label><textarea cols="50" rows="50" name="job">hexlet</textarea>'\
+      '</form>'
+    )
+  end
+
   def test_exception_when_field_not_match
     assert_raises(NameError) do
       HexletCode.form_for @user, url: '/users' do |f|
