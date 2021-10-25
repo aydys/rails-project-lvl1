@@ -54,7 +54,7 @@ class HexletCodeTest < Minitest::Test
     assert_equal(
       form,
       '<form action="#" method="post">'\
-        '<label for="job">Job</label><textarea cols="20" rows="40" name="job">hexlet</textarea>'\
+      '<label for="job">Job</label><textarea cols="20" rows="40" name="job">hexlet</textarea>'\
       '</form>'
     )
   end
@@ -67,7 +67,7 @@ class HexletCodeTest < Minitest::Test
     assert_equal(
       form,
       '<form action="#" method="post">'\
-        '<label for="job">Job</label><textarea cols="50" rows="50" name="job">hexlet</textarea>'\
+      '<label for="job">Job</label><textarea cols="50" rows="50" name="job">hexlet</textarea>'\
       '</form>'
     )
   end
