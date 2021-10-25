@@ -3,25 +3,26 @@
 module HexletCode
   # creates inputs, textarea
   class FormFields
-    attr_reader :acc
-
     def initialize(user)
       @user = user
-      @acc = +''
+      @acc = []
     end
 
     def input(name, **hash)
       @user.public_send(name)
-      label = +"<label for=\"#{name}\">#{name.capitalize}</label>"
-      @acc << if hash.key? :as
-                "#{label}<textarea cols=\"20\" rows=\"40\" name=\"#{name}\">#{@user[name]}</textarea>"
-              else
-                "#{label}<input name=\"#{name}\" type=\"text\" value=\"#{@user[name]}\">"
-              end
+      label = Element.new 'label', { for: name }, -> { name.capitalize }
+      @acc << label
+      input = Input.new(name, hash || {}, @user[name])
+      @acc << input
     end
 
     def submit(value = 'Save')
-      @acc << "<input name=\"commit\" type=\"submit\" value=\"#{value}\">"
+      element = Element.new 'input', { name: 'commit', type: 'submit', value: value }, nil
+      @acc << element
+    end
+
+    def render
+      @acc.each_with_object(+'').each { |elem, acc| acc << elem.render }
     end
   end
 end
