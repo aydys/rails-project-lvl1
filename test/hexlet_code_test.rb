@@ -33,6 +33,19 @@ class HexletCodeTest < Minitest::Test
     )
   end
 
+  def test_that_created_input_with_options
+    form = HexletCode.form_for @user do |f|
+      f.input :name, class: 'user-name'
+    end
+
+    assert_equal(
+      form,
+      '<form action="#" method="post">'\
+      '<label for="name">Name</label><input class="user-name" name="name" type="text" value="rob">'\
+      '</form>'
+    )
+  end
+
   def test_that_created_form_with_textarea
     form = HexletCode.form_for @user do |f|
       f.input :job, as: :text

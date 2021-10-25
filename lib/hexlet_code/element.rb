@@ -9,6 +9,12 @@ module HexletCode
       @block = block
     end
 
+    def render
+      render_html
+    end
+
+    private
+
     def render_html
       attributes = @hash.each_with_object(+'') do |(key, value), acc|
         acc << " #{key}=\"#{value}\""
@@ -18,10 +24,6 @@ module HexletCode
       else
         "<#{@tag_name}#{attributes}>"
       end
-    end
-
-    def render
-      render_html
     end
   end
 end

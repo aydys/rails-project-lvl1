@@ -12,7 +12,7 @@ module HexletCode
       @user.public_send(name)
       label = Element.new 'label', { for: name }, -> { name.capitalize }
       @acc << label
-      input = Input.new(name, hash || {}, @user[name])
+      input = Input.new(name, hash, @user[name])
       @acc << input
     end
 

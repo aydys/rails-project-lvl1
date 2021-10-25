@@ -17,8 +17,7 @@ module HexletCode
           raise ArgumentError, "Wrong type of input: #{@hash[:as]}"
         end
       else
-        element = Element.new 'input', { name: @name, type: 'text', value: @value }, nil
-        element.render
+        render_input
       end
     end
 
@@ -30,6 +29,14 @@ module HexletCode
       @hash[:rows] ||= '40'
       @hash[:name] = @name
       element = Element.new 'textarea', @hash, -> { @value }
+      element.render
+    end
+
+    def render_input
+      @hash[:name] = @name
+      @hash[:type] ||= 'text'
+      @hash[:value] = @value
+      element = Element.new 'input', @hash, nil
       element.render
     end
   end
