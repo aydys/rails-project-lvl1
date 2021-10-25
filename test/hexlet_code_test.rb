@@ -66,7 +66,7 @@ class HexletCodeTest < Minitest::Test
     assert_equal(
       form,
       '<form action="#" method="post"><label for="name">Name</label><input name="name" type="text" value="rob">'\
-      '<input name="commit" type="submit" value="Send" >'\
+      '<input name="commit" type="submit" value="Send">'\
       '</form>'
     )
   end

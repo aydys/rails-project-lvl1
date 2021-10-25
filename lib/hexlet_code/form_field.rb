@@ -21,7 +21,7 @@ module HexletCode
     end
 
     def submit(value = 'Save')
-      @acc << "<input name=\"commit\" type=\"submit\" value=\"#{value}\" >"
+      @acc << "<input name=\"commit\" type=\"submit\" value=\"#{value}\">"
     end
   end
 end
