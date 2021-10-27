@@ -28,16 +28,14 @@ module HexletCode
       @hash[:cols] ||= '20'
       @hash[:rows] ||= '40'
       @hash[:name] = @name
-      element = Element.new 'textarea', @hash, -> { @value }
-      element.render
+      Tag.build('textarea', **@hash) { @value }
     end
 
     def render_input
       @hash[:name] = @name
       @hash[:type] ||= 'text'
       @hash[:value] = @value
-      element = Element.new 'input', @hash, nil
-      element.render
+      Tag.build('input', **@hash)
     end
   end
 end

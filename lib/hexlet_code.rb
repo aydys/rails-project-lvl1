@@ -3,8 +3,8 @@
 require_relative 'hexlet_code/version'
 require_relative 'hexlet_code/user'
 require_relative 'hexlet_code/form_field'
-require_relative 'hexlet_code/element'
 require_relative 'hexlet_code/input'
+require_relative 'hexlet_code/tag'
 
 # main module
 module HexletCode
@@ -19,17 +19,7 @@ module HexletCode
       inputs = form_fields.render
     end
     path = hash[:url] || '#'
-    form_element = Element.new 'form', { action: path, method: 'post' }, -> { inputs }
-    form_element.render
+    Tag.build('form', action: path, method: 'post') { inputs }
   end
   module_function :form_for
-
-  # create a html element
-  module Tag
-    def build(tag_name, **hash, &block)
-      element = HexletCode::Element.new tag_name, hash, block
-      element.render
-    end
-    module_function :build
-  end
 end

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module HexletCode
-  # common element
-  class Element
+  # create a html element
+  class Tag
     def initialize(tag_name, hash, block)
       @tag_name = tag_name
       @hash = hash
@@ -11,6 +11,11 @@ module HexletCode
 
     def render
       render_html
+    end
+
+    def self.build(tag_name, **hash, &block)
+      element = new tag_name, hash, block
+      element.render
     end
 
     private
