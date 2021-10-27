@@ -2,7 +2,7 @@
 
 require_relative 'hexlet_code/version'
 require_relative 'hexlet_code/user'
-require_relative 'hexlet_code/form_field'
+require_relative 'hexlet_code/form_fields'
 require_relative 'hexlet_code/input'
 require_relative 'hexlet_code/tag'
 
