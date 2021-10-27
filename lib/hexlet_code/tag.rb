@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../render_type/render_type'
+require_relative 'render_type'
 
 module HexletCode
   # create a html element
