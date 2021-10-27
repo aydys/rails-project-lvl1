@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 require 'test_helper'
-require 'hexlet_code'
 
 class HexletCodeTest < Minitest::Test
   def setup
     @user = HexletCode::User.new name: 'rob', job: 'hexlet', gender: 'm'
+    @tag = HexletCode::Tag
   end
 
   def test_that_it_has_a_version_number
@@ -15,61 +15,59 @@ class HexletCodeTest < Minitest::Test
   def test_that_created_form
     form = HexletCode.form_for @user
     form_with_link = HexletCode.form_for @user, url: '/users'
+    expectation = @tag.build('form', action: '#', method: 'post') {}
+    expectation_with_link = @tag.build('form', action: '/users', method: 'post') {}
 
-    assert_equal(form, '<form action="#" method="post"></form>')
-    assert_equal(form_with_link, '<form action="/users" method="post"></form>')
+    assert_equal(expectation, form)
+    assert_equal(expectation_with_link, form_with_link)
   end
 
   def test_that_created_form_with_input
     form = HexletCode.form_for @user do |f|
       f.input :name
     end
+    expectation = @tag.build('form', action: '#', method: 'post') do
+      @tag.build('label', for: 'name') { 'Name' } +
+        @tag.build('input', name: 'name', type: 'text', value: 'rob')
+    end
 
-    assert_equal(
-      form,
-      '<form action="#" method="post">'\
-      '<label for="name">Name</label><input name="name" type="text" value="rob">'\
-      '</form>'
-    )
+    assert_equal(expectation, form)
   end
 
   def test_that_created_input_with_options
     form = HexletCode.form_for @user do |f|
       f.input :name, class: 'user-name'
     end
+    expectation = @tag.build('form', action: '#', method: 'post') do
+      @tag.build('label', for: 'name') { 'Name' } +
+        @tag.build('input', class: 'user-name', name: 'name', type: 'text', value: 'rob')
+    end
 
-    assert_equal(
-      form,
-      '<form action="#" method="post">'\
-      '<label for="name">Name</label><input class="user-name" name="name" type="text" value="rob">'\
-      '</form>'
-    )
+    assert_equal(expectation, form)
   end
 
   def test_that_created_form_with_textarea
     form = HexletCode.form_for @user do |f|
       f.input :job, as: :text
     end
+    expectation = @tag.build('form', action: '#', method: 'post') do
+      @tag.build('label', for: 'job') { 'Job' } +
+        @tag.build('textarea', cols: '20', rows: '40', name: 'job') { 'hexlet' }
+    end
 
-    assert_equal(
-      form,
-      '<form action="#" method="post">'\
-      '<label for="job">Job</label><textarea cols="20" rows="40" name="job">hexlet</textarea>'\
-      '</form>'
-    )
+    assert_equal(expectation, form)
   end
 
   def test_that_created_textarea_with_options
     form = HexletCode.form_for @user do |f|
       f.input :job, as: :text, cols: 50, rows: 50
     end
+    expectation = @tag.build('form', action: '#', method: 'post') do
+      @tag.build('label', for: 'job') { 'Job' } +
+        @tag.build('textarea', cols: '50', rows: '50', name: 'job') { 'hexlet' }
+    end
 
-    assert_equal(
-      form,
-      '<form action="#" method="post">'\
-      '<label for="job">Job</label><textarea cols="50" rows="50" name="job">hexlet</textarea>'\
-      '</form>'
-    )
+    assert_equal(expectation, form)
   end
 
   def test_exception_when_field_not_match
@@ -88,12 +86,12 @@ class HexletCodeTest < Minitest::Test
       f.input :name
       f.submit 'Send'
     end
+    expectation = @tag.build('form', action: '#', method: 'post') do
+      @tag.build('label', for: 'name') { 'Name' } +
+        @tag.build('input', name: 'name', type: 'text', value: 'rob') +
+        @tag.build('input', name: 'commit', type: 'submit', value: 'Send')
+    end
 
-    assert_equal(
-      form,
-      '<form action="#" method="post"><label for="name">Name</label><input name="name" type="text" value="rob">'\
-      '<input name="commit" type="submit" value="Send">'\
-      '</form>'
-    )
+    assert_equal(expectation, form)
   end
 end
