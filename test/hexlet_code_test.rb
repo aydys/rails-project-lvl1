@@ -15,8 +15,8 @@ class HexletCodeTest < Minitest::Test
   def test_that_created_form
     form = HexletCode.form_for @user
     form_with_link = HexletCode.form_for @user, url: '/users'
-    expectation = @tag.build('form', action: '#', method: 'post') {}
-    expectation_with_link = @tag.build('form', action: '/users', method: 'post') {}
+    expectation = @tag.build('form', action: '#', method: 'post') { nil }
+    expectation_with_link = @tag.build('form', action: '/users', method: 'post') { nil }
 
     assert_equal(expectation, form)
     assert_equal(expectation_with_link, form_with_link)
