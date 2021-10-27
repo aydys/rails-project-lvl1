@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
+require_relative '../render_type/render_type'
+
 module HexletCode
   # create a html element
   class Tag
+    include RenderType
+
     def initialize(tag_name, hash, block)
       @tag_name = tag_name
       @hash = hash
@@ -16,19 +20,6 @@ module HexletCode
     def self.build(tag_name, **hash, &block)
       element = new tag_name, hash, block
       element.render
-    end
-
-    private
-
-    def render_html
-      attributes = @hash.each_with_object(+'') do |(key, value), acc|
-        acc << " #{key}=\"#{value}\""
-      end
-      if @block
-        "<#{@tag_name}#{attributes}>#{@block.call}</#{@tag_name}>"
-      else
-        "<#{@tag_name}#{attributes}>"
-      end
     end
   end
 end
