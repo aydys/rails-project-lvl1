@@ -1,18 +1,20 @@
 # frozen_string_literal: true
 
 require_relative '../tag'
+require_relative './base_input'
 
 # namespace for inputs
-
 module HexletCode
   module InputTags
     # created input element
-    class InputElement
+    class InputElement < BaseInput
       def self.build(name, value, hash)
-        hash[:name] = name
-        hash[:type] ||= 'text'
-        hash[:value] = value
-        HexletCode::Tag.build('input', **hash)
+        super(name)
+        attributes = hash.clone
+        attributes[:name] = @name
+        attributes[:type] ||= 'text'
+        attributes[:value] = value
+        HexletCode::Tag.build('input', **attributes)
       end
     end
   end
