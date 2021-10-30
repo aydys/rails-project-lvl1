@@ -10,7 +10,7 @@ module HexletCode
     class Textarea < BaseInput
       def self.build(name, value, hash)
         super(name)
-        attributes = hash.reject { |k, _v| k == :as }
+        attributes = hash.except(:as)
         attributes[:cols] ||= '20'
         attributes[:rows] ||= '40'
         attributes[:name] = @name
