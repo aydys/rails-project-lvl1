@@ -25,9 +25,9 @@ class TagsTest < Minitest::Test
         HexletCode::Tag.build('input', name: 'name', type: 'text', value: 'rob')
     end
     expectation = '<form action="#" method="post">' \
-      '<label for="name">Name</label>' \
-      '<input name="name" type="text" value="rob">' \
-    '</form>'
+                  '<label for="name">Name</label>' \
+                  '<input name="name" type="text" value="rob">' \
+                  '</form>'
 
     assert_equal(expectation, element)
   end
@@ -38,9 +38,9 @@ class TagsTest < Minitest::Test
         HexletCode::Tag.build('input', name: 'name', type: 'text', value: 'rob')
     end
     expectation = '<form action="/users" method="post">' \
-      '<label for="name">Name</label>' \
-      '<input name="name" type="text" value="rob">' \
-    '</form>'
+                  '<label for="name">Name</label>' \
+                  '<input name="name" type="text" value="rob">' \
+                  '</form>'
 
     assert_equal(expectation, element)
   end
