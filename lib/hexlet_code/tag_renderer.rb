@@ -2,7 +2,7 @@
 
 module HexletCode
   # typing render form
-  module RenderType
+  module TagRenderer
     private
 
     def render_html

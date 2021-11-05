@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require_relative 'render_type'
+require_relative 'tag_renderer'
 
 module HexletCode
   # create a html element
   class Tag
-    include RenderType
+    include TagRenderer
 
     def initialize(tag_name, hash, block)
       @tag_name = tag_name
