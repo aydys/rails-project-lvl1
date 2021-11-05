@@ -3,16 +3,16 @@
 module HexletCode
   # creates inputs, textarea
   class FormFields
-    def initialize(user)
-      @user = user
+    def initialize(entity)
+      @entity = entity
       @acc = []
     end
 
     def input(name, **hash)
-      @user.public_send(name)
+      value = @entity.public_send(name)
       label = Tag.build('label', for: name) { name.capitalize }
       @acc << label
-      input = Input.new(name, hash, @user[name])
+      input = Input.new(name, hash, value)
       @acc << input.render
     end
 
