@@ -18,4 +18,27 @@ class TagsTest < Minitest::Test
     assert_equal('<label>Email</label>', element)
     assert_equal('<label for="email">Email</label>', element_with_attribute)
   end
+
+  def test_method_that_creates_form_element
+    element = HexletCode::Tag.build('form', action: '#', method: 'post') { nil }
+    element_with_link = HexletCode::Tag.build('form', action: '/users', method: 'post') { nil }
+    expectation = '<form action="#" method="post"></form>'
+    expectation_with_link = '<form action="/users" method="post"></form>'
+
+    assert_equal(expectation, element)
+    assert_equal(expectation_with_link, element_with_link)
+  end
+
+  def test_method_that_creates_form_with_input
+    element = HexletCode::Tag.build('form', action: '#', method: 'post') do
+      HexletCode::Tag.build('label', for: 'name') { 'Name' } +
+        HexletCode::Tag.build('input', name: 'name', type: 'text', value: 'rob')
+    end
+    expectation = '<form action="#" method="post">' \
+      '<label for="name">Name</label>' \
+      '<input name="name" type="text" value="rob">' \
+    '</form>'
+
+    assert_equal(expectation, element)
+  end
 end
