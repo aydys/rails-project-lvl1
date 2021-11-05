@@ -12,12 +12,11 @@ module HexletCode
   # Your code goes here...
 
   def form_for(user, **hash)
-    inputs = ''
-    if block_given?
-      form_fields = FormFields.new user
-      yield form_fields
-      inputs = form_fields.render
-    end
+    raise 'Required presence of block with form fields' unless block_given?
+
+    form_fields = FormFields.new user
+    yield form_fields
+    inputs = form_fields.render
     path = hash[:url] || '#'
     Tag.build('form', action: path, method: 'post') { inputs }
   end

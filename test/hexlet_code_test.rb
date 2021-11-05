@@ -12,16 +12,6 @@ class HexletCodeTest < Minitest::Test
     refute_nil ::HexletCode::VERSION
   end
 
-  def test_that_created_form
-    form = HexletCode.form_for @user
-    form_with_link = HexletCode.form_for @user, url: '/users'
-    expectation = @tag.build('form', action: '#', method: 'post') { nil }
-    expectation_with_link = @tag.build('form', action: '/users', method: 'post') { nil }
-
-    assert_equal(expectation, form)
-    assert_equal(expectation_with_link, form_with_link)
-  end
-
   def test_that_created_form_with_input
     form = HexletCode.form_for @user do |f|
       f.input :name
@@ -93,5 +83,11 @@ class HexletCodeTest < Minitest::Test
     end
 
     assert_equal(expectation, form)
+  end
+
+  def test_exception_when_created_form_without_fields
+    assert_raises(RuntimeError) do
+      HexletCode.form_for @user, url: '/users'
+    end
   end
 end
