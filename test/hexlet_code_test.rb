@@ -42,7 +42,7 @@ class HexletCodeTest < Minitest::Test
     end
     expectation = @tag.build('form', action: '#', method: 'post') do
       @tag.build('label', for: 'job') { 'Job' } +
-        @tag.build('textarea', cols: '20', rows: '40', name: 'job') { 'hexlet' }
+        @tag.build('textarea', name: 'job', cols: '20', rows: '40') { 'hexlet' }
     end
 
     assert_equal(expectation, form)
@@ -54,7 +54,7 @@ class HexletCodeTest < Minitest::Test
     end
     expectation = @tag.build('form', action: '#', method: 'post') do
       @tag.build('label', for: 'job') { 'Job' } +
-        @tag.build('textarea', cols: '50', rows: '50', name: 'job') { 'hexlet' }
+        @tag.build('textarea', name: 'job', cols: '50', rows: '50') { 'hexlet' }
     end
 
     assert_equal(expectation, form)

@@ -8,12 +8,16 @@ module HexletCode
   module InputTags
     # created input element
     class InputElement < BaseInput
-      def self.build(name, value, attributes)
+      def initialize(name)
         super(name)
-        attributes[:name] = @name
-        attributes[:type] ||= 'text'
-        attributes[:value] = value
-        HexletCode::Tag.build('input', **attributes)
+        @attributes[:type] = 'text'
+      end
+
+      def self.build(name, value, attributes)
+        initial_attributes = new(name).attributes
+        initial_attributes[:value] = value
+        final_attributes = attributes.merge(initial_attributes)
+        HexletCode::Tag.build('input', **final_attributes)
       end
     end
   end

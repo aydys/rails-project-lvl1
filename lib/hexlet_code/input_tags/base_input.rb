@@ -7,8 +7,10 @@ module HexletCode
   module InputTags
     # created textarea
     class BaseInput
-      def self.build(name)
-        @name = name
+      attr_accessor :attributes
+
+      def initialize(name)
+        @attributes = { name: name }
       end
     end
   end
