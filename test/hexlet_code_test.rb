@@ -4,7 +4,7 @@ require 'test_helper'
 
 class HexletCodeTest < Minitest::Test
   def setup
-    @user = HexletCode::User.new name: 'rob', job: 'hexlet', gender: 'm'
+    @user = Fixture::User.new name: 'rob', job: 'hexlet', gender: 'm'
     @tag = HexletCode::Tag
   end
 

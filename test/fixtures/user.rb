@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-module HexletCode
+module Fixture
   User = Struct.new(:name, :job, :gender, keyword_init: true)
 end

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative 'hexlet_code/version'
-require_relative 'hexlet_code/user'
 require_relative 'hexlet_code/form_fields'
 require_relative 'hexlet_code/input'
 require_relative 'hexlet_code/tag'
@@ -11,10 +10,10 @@ module HexletCode
   class Error < StandardError; end
   # Your code goes here...
 
-  def form_for(user, **hash)
+  def form_for(entity, **hash)
     raise 'Required presence of block with form fields' unless block_given?
 
-    form_fields = FormFields.new user
+    form_fields = FormFields.new entity
     yield form_fields
     inputs = form_fields.render
     path = hash[:url] || '#'
