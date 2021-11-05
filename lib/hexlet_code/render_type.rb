@@ -6,13 +6,13 @@ module HexletCode
     private
 
     def render_html
-      attributes = @hash.each_with_object(+'') do |(key, value), acc|
+      attributes_acc = @attributes.each_with_object(+'') do |(key, value), acc|
         acc << " #{key}=\"#{value}\""
       end
       if @block
-        "<#{@tag_name}#{attributes}>#{@block.call}</#{@tag_name}>"
+        "<#{@tag_name}#{attributes_acc}>#{@block.call}</#{@tag_name}>"
       else
-        "<#{@tag_name}#{attributes}>"
+        "<#{@tag_name}#{attributes_acc}>"
       end
     end
   end

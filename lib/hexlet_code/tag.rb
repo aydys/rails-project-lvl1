@@ -9,7 +9,7 @@ module HexletCode
 
     def initialize(tag_name, hash, block)
       @tag_name = tag_name
-      @hash = hash
+      @attributes = hash
       @block = block
     end
 
