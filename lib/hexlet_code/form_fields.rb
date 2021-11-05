@@ -8,11 +8,11 @@ module HexletCode
       @acc = []
     end
 
-    def input(name, **hash)
+    def input(name, **options)
       value = @entity.public_send(name)
       label = Tag.build('label', for: name) { name.capitalize }
       @acc << label
-      input = Input.new(name, hash, value)
+      input = Input.new(name, options, value)
       @acc << input.render
     end
 

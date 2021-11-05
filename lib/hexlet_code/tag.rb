@@ -13,8 +13,8 @@ module HexletCode
       @block = block
     end
 
-    def self.build(tag_name, **hash, &block)
-      tag = new tag_name, hash, block
+    def self.build(tag_name, **attributes, &block)
+      tag = new tag_name, attributes, block
       TagRenderer.render(tag)
     end
   end

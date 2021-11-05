@@ -6,18 +6,18 @@ require_relative 'input_tags/input_element'
 module HexletCode
   # input element
   class Input
-    def initialize(name, hash, value)
+    def initialize(name, options, value)
       @name = name
-      @hash = hash
+      @options = options
       @value = value
     end
 
     def render
-      if @hash.key?(:as)
-        class_input = InputTags.const_get(@hash[:as].to_s.capitalize)
-        class_input.build(@name, @value, @hash)
+      if @options.key?(:as)
+        class_input = InputTags.const_get(@options[:as].to_s.capitalize)
+        class_input.build(@name, @value, @options)
       else
-        HexletCode::InputTags::InputElement.build(@name, @value, @hash)
+        HexletCode::InputTags::InputElement.build(@name, @value, @options)
       end
     end
   end
