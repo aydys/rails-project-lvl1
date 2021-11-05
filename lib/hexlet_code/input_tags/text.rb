@@ -7,7 +7,7 @@ module HexletCode
   # namespace for inputs
   module InputTags
     # created textarea
-    class Textarea < BaseInput
+    class Text < BaseInput
       def self.build(name, value, hash)
         super(name)
         attributes = hash.except(:as)
