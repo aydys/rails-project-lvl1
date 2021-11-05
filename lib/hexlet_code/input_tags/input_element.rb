@@ -8,9 +8,8 @@ module HexletCode
   module InputTags
     # created input element
     class InputElement < BaseInput
-      def self.build(name, value, hash)
+      def self.build(name, value, attributes)
         super(name)
-        attributes = hash.clone
         attributes[:name] = @name
         attributes[:type] ||= 'text'
         attributes[:value] = value
