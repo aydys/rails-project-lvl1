@@ -5,7 +5,6 @@ require 'test_helper'
 class HexletCodeTest < Minitest::Test
   def setup
     @user = Fixture::User.new name: 'rob', job: 'hexlet', gender: 'm'
-    @tag = HexletCode::Tag
   end
 
   def test_that_it_has_a_version_number
@@ -16,10 +15,9 @@ class HexletCodeTest < Minitest::Test
     form = HexletCode.form_for @user do |f|
       f.input :name
     end
-    expectation = @tag.build('form', action: '#', method: 'post') do
-      @tag.build('label', for: 'name') { 'Name' } +
-        @tag.build('input', name: 'name', type: 'text', value: 'rob')
-    end
+    expectation = '<form action="#" method="post">'\
+    '<label for="name">Name</label><input name="name" type="text" value="rob">'\
+    '</form>'
 
     assert_equal(expectation, form)
   end
@@ -28,10 +26,10 @@ class HexletCodeTest < Minitest::Test
     form = HexletCode.form_for @user do |f|
       f.input :name, class: 'user-name'
     end
-    expectation = @tag.build('form', action: '#', method: 'post') do
-      @tag.build('label', for: 'name') { 'Name' } +
-        @tag.build('input', class: 'user-name', name: 'name', type: 'text', value: 'rob')
-    end
+    expectation = '<form action="#" method="post">'\
+    '<label for="name">Name</label>' \
+    '<input class="user-name" name="name" type="text" value="rob">'\
+    '</form>'
 
     assert_equal(expectation, form)
   end
@@ -40,10 +38,10 @@ class HexletCodeTest < Minitest::Test
     form = HexletCode.form_for @user do |f|
       f.input :job, as: :text
     end
-    expectation = @tag.build('form', action: '#', method: 'post') do
-      @tag.build('label', for: 'job') { 'Job' } +
-        @tag.build('textarea', name: 'job', cols: '20', rows: '40') { 'hexlet' }
-    end
+    expectation = '<form action="#" method="post">' \
+    '<label for="job">Job</label>' \
+    '<textarea name="job" cols="20" rows="40">hexlet</textarea>' \
+    '</form>'
 
     assert_equal(expectation, form)
   end
@@ -52,10 +50,10 @@ class HexletCodeTest < Minitest::Test
     form = HexletCode.form_for @user do |f|
       f.input :job, as: :text, cols: 50, rows: 50
     end
-    expectation = @tag.build('form', action: '#', method: 'post') do
-      @tag.build('label', for: 'job') { 'Job' } +
-        @tag.build('textarea', name: 'job', cols: '50', rows: '50') { 'hexlet' }
-    end
+    expectation = '<form action="#" method="post">' \
+    '<label for="job">Job</label>' \
+    '<textarea name="job" cols="50" rows="50">hexlet</textarea>' \
+    '</form>'
 
     assert_equal(expectation, form)
   end
@@ -76,11 +74,11 @@ class HexletCodeTest < Minitest::Test
       f.input :name
       f.submit 'Send'
     end
-    expectation = @tag.build('form', action: '#', method: 'post') do
-      @tag.build('label', for: 'name') { 'Name' } +
-        @tag.build('input', name: 'name', type: 'text', value: 'rob') +
-        @tag.build('input', name: 'commit', type: 'submit', value: 'Send')
-    end
+    expectation = '<form action="#" method="post">' \
+    '<label for="name">Name</label>' \
+    '<input name="name" type="text" value="rob">'\
+    '<input name="commit" type="submit" value="Send">'\
+    '</form>'
 
     assert_equal(expectation, form)
   end
