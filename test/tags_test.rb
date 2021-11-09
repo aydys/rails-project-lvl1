@@ -11,6 +11,12 @@ class TagsTest < Minitest::Test
     assert_equal('<input type="submit" value="Save">', void_element_with_attributes)
   end
 
+  def test_exception_when_received_block_to_void_elements
+    assert_raises(RuntimeError) do
+      HexletCode::Tag.build('br') { 'something' }
+    end
+  end
+
   def test_method_that_creates_element_with_closing_tag
     element = HexletCode::Tag.build('label') { 'Email' }
     element_with_attribute = HexletCode::Tag.build('label', for: 'email') { 'Email' }
