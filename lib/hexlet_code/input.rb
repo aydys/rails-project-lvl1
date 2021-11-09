@@ -14,7 +14,7 @@ module HexletCode
 
     def render
       @options[:as] ||= 'plain'
-      input_type = @options[:as].to_s.capitalize + 'Input'
+      input_type = "#{@options[:as].to_s.capitalize}Input"
       class_input = InputTags.const_get(input_type)
       class_input.build(@name, @value, @options)
     end
