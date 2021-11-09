@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative 'input_tags/text'
-require_relative 'input_tags/input_element'
+require_relative 'input_tags/text_input'
+require_relative 'input_tags/plain_input'
 
 module HexletCode
   # input element
@@ -13,12 +13,10 @@ module HexletCode
     end
 
     def render
-      if @options.key?(:as)
-        class_input = InputTags.const_get(@options[:as].to_s.capitalize)
-        class_input.build(@name, @value, @options)
-      else
-        HexletCode::InputTags::InputElement.build(@name, @value, @options)
-      end
+      @options[:as] ||= 'plain'
+      input_type = @options[:as].to_s.capitalize + 'Input'
+      class_input = InputTags.const_get(input_type)
+      class_input.build(@name, @value, @options)
     end
   end
 end
