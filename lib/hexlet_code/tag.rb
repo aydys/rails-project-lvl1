@@ -15,8 +15,8 @@ module HexletCode
     end
 
     def self.build(tag_name, **attributes, &block)
-      is_invalid_tag = @empty_elements.include?(tag_name) && block_given?
-      raise "Invalid tag name: #{tag_name}" if is_invalid_tag
+      is_invalid_empty_tag = @empty_elements.include?(tag_name) && block_given?
+      raise "The empty tag <#{tag_name}> shouldn't have content" if is_invalid_empty_tag
 
       tag = new tag_name, attributes, block
       TagRenderer.render(tag)
