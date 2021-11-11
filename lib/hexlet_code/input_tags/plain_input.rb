@@ -9,7 +9,7 @@ module HexletCode
     # created input element
     class PlainInput < BaseInput
       def initialize(name)
-        super(name)
+        super
         @attributes[:type] = 'text'
       end
 
