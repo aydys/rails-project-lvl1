@@ -8,17 +8,15 @@ module HexletCode
   module InputTags
     # created textarea
     class TextInput < BaseInput
-      def initialize(name)
-        super(name)
-        @attributes[:cols] = '20'
-        @attributes[:rows] = '40'
+      def initialize(name, options)
+        super
+        @attributes[:cols] ||= '20'
+        @attributes[:rows] ||= '40'
       end
 
       def self.build(name, value, options)
-        init_attributes = new(name).attributes
-        attributes = options.except(:as)
-        final_attributes = init_attributes.merge(attributes)
-        HexletCode::Tag.build('textarea', **final_attributes) { value }
+        attributes = new(name, options).attributes
+        HexletCode::Tag.build('textarea', **attributes) { value }
       end
     end
   end

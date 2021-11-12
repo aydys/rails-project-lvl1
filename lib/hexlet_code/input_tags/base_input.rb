@@ -9,8 +9,9 @@ module HexletCode
     class BaseInput
       attr_accessor :attributes
 
-      def initialize(name)
-        @attributes = { name: name }
+      def initialize(name, options)
+        filtered_options = options.except(:as)
+        @attributes = { name: name, **filtered_options }
       end
     end
   end
