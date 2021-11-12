@@ -8,7 +8,6 @@ require_relative 'hexlet_code/tag'
 # main module
 module HexletCode
   class Error < StandardError; end
-  # Your code goes here...
 
   def form_for(entity, **attributes)
     raise 'Required presence of block with form fields' unless block_given?
