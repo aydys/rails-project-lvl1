@@ -7,7 +7,7 @@ require_relative './base_input'
 module HexletCode
   module InputTags
     # created input element
-    class PlainInput < BaseInput
+    class FormInput < BaseInput
       def initialize(name)
         super
         @attributes[:type] = 'text'
