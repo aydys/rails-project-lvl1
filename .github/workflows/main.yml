@@ -1,19 +1,19 @@
-name: Ruby
+name: CI
 
-on: [push,pull_request]
+on: [push, pull_request]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 3.0.2
-    - name: Run the default task
-      run: |
-        gem install bundler -v 2.2.0
-        bundle install
-        bundle exec rake
-        make run_linter
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0.2
+      - name: Install dependencies
+        run: make install
+      - name: Run CI
+        run: |
+          make run_linter
+          make tests

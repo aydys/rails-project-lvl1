@@ -1,4 +1,4 @@
-![Rubocop](https://github.com/aydys/rails-project-lvl1/actions/workflows/main.yml/badge.svg)
+![CI](https://github.com/aydys/rails-project-lvl1/actions/workflows/main.yml/badge.svg)
 ![Hexlet-Check](https://github.com/aydys/rails-project-lvl1/actions/workflows/hexlet-check.yml/badge.svg)
 
 # HexletCode
