@@ -6,9 +6,9 @@ class TagsTest < Minitest::Test
     void_element_with_attribute = HexletCode::Tag.build('img', src: 'path/to/image')
     void_element_with_attributes = HexletCode::Tag.build('input', type: 'submit', value: 'Save')
 
-    assert_equal('<br>', void_element)
-    assert_equal('<img src="path/to/image">', void_element_with_attribute)
-    assert_equal('<input type="submit" value="Save">', void_element_with_attributes)
+    assert_equal(Fixture::HTML_TAGS[:br], void_element)
+    assert_equal(Fixture::HTML_TAGS[:img], void_element_with_attribute)
+    assert_equal(Fixture::HTML_TAGS[:input], void_element_with_attributes)
   end
 
   def test_exception_when_received_block_to_void_elements
@@ -21,8 +21,8 @@ class TagsTest < Minitest::Test
     element = HexletCode::Tag.build('label') { 'Email' }
     element_with_attribute = HexletCode::Tag.build('label', for: 'email') { 'Email' }
 
-    assert_equal('<label>Email</label>', element)
-    assert_equal('<label for="email">Email</label>', element_with_attribute)
+    assert_equal(Fixture::HTML_TAGS[:label], element)
+    assert_equal(Fixture::HTML_TAGS[:label_with_attribute], element_with_attribute)
   end
 
   def test_method_that_creates_form_with_input
@@ -30,10 +30,7 @@ class TagsTest < Minitest::Test
       HexletCode::Tag.build('label', for: 'name') { 'Name' } +
         HexletCode::Tag.build('input', name: 'name', type: 'text', value: 'rob')
     end
-    expectation = '<form action="#" method="post">' \
-                  '<label for="name">Name</label>' \
-                  '<input name="name" type="text" value="rob">' \
-                  '</form>'
+    expectation = Fixture::FORMS[:form]
 
     assert_equal(expectation, element)
   end
@@ -43,10 +40,7 @@ class TagsTest < Minitest::Test
       HexletCode::Tag.build('label', for: 'name') { 'Name' } +
         HexletCode::Tag.build('input', name: 'name', type: 'text', value: 'rob')
     end
-    expectation = '<form action="/users" method="post">' \
-                  '<label for="name">Name</label>' \
-                  '<input name="name" type="text" value="rob">' \
-                  '</form>'
+    expectation = Fixture::FORMS[:form_with_action]
 
     assert_equal(expectation, element)
   end
