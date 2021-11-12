@@ -1,14 +1,6 @@
 # frozen_string_literal: true
 
 module Fixture
-  HTML_TAGS = {
-    br: '<br>',
-    img: '<img src="path/to/image">',
-    input: '<input type="submit" value="Save">',
-    label: '<label>Email</label>',
-    label_with_attribute: '<label for="email">Email</label>'
-  }.freeze
-
   FORMS = {
     form: '<form action="#" method="post">' \
           '<label for="name">Name</label>' \

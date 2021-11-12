@@ -23,36 +23,6 @@ Or install it yourself as:
 
 ## Usage
 
-The form generator internally creates various tags such as \<input\>, \<label\>, \<form\> and others. The creation of tags is a repetitive operation, which is convenient to take into a separate method. Example:
-
-```ruby
-HexletCode::Tag.build('br')
-
-# <br>
-
-HexletCode::Tag.build('img', src: 'path/to/image')
-
-# <img src="path/to/image">
-
-HexletCode::Tag.build('input', type: 'submit', value: 'Save')
-
-# <input type="submit" value="Save">
-
-# For paired tags, the body is passed as a block
-
-HexletCode::Tag.build('label') { 'Email' }
-
-# <label>Email</label>
-
-HexletCode::Tag.build('label', for: 'email') { 'Email' }
-
-# <label for="email">Email</label>
-
-HexletCode::Tag.build('div')
-
-# <div></div>
-```
-
 ### Generating Fields
 
 Generating specific fields based on the data of the passed object:
