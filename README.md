@@ -1,10 +1,9 @@
 ![Rubocop](https://github.com/aydys/rails-project-lvl1/actions/workflows/main.yml/badge.svg)
 ![Hexlet-Check](https://github.com/aydys/rails-project-lvl1/actions/workflows/hexlet-check.yml/badge.svg)
+
 # HexletCode
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/hexlet_code`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Form generator - DSL, with the help of which it is convenient to generate forms. This library takes on tasks that usually require writing a lot of boilerplate code, such as error handling. In the Rails world, Simple Form is used for this. Our generator is conceptually similar to it, but much simpler.
 
 ## Installation
 
@@ -24,7 +23,92 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+The form generator internally creates various tags such as \<input\>, \<label\>, \<form\> and others. The creation of tags is a repetitive operation, which is convenient to take into a separate method. Example:
+
+```ruby
+HexletCode::Tag.build('br')
+
+# <br>
+
+HexletCode::Tag.build('img', src: 'path/to/image')
+
+# <img src="path/to/image">
+
+HexletCode::Tag.build('input', type: 'submit', value: 'Save')
+
+# <input type="submit" value="Save">
+
+# For paired tags, the body is passed as a block
+
+HexletCode::Tag.build('label') { 'Email' }
+
+# <label>Email</label>
+
+HexletCode::Tag.build('label', for: 'email') { 'Email' }
+
+# <label for="email">Email</label>
+
+HexletCode::Tag.build('div')
+
+# <div></div>
+```
+
+### Generating Fields
+
+Generating specific fields based on the data of the passed object:
+
+```ruby
+User = Struct.new(:name, :job, :gender, keyword_init: true)
+user = User.new name: 'rob', job: 'hexlet', gender: 'm'
+
+HexletCode.form_for user do |f|
+  # Checks if there is a value inside name
+  f.input :name
+  # Checks if there is a value inside job
+  f.input :job, as: :text
+end
+
+# <form action="#" method="post">
+#   <input name="name" type="text" value="rob">
+#   <textarea cols="20" rows="40" name="job">hexlet</textarea>
+# </form>
+```
+
+If the specified field is not in the object, then an error occurs:
+
+```ruby
+html = HexletCode.form_for user, url: '/users' do |f|
+  f.input :name
+  f.input :job, as: :text
+  # User has no age field
+  f.input :age
+  f.submit
+end
+# =>  `public_send': undefined method `age' for #<struct User id=nil, name=nil, job=nil> (NoMethodError)
+```
+
+### Submit
+
+By default, this method uses the Save value as the name of the button, but you can override it by passing the desired text as the first argument.
+
+```ruby
+User = Struct.new(:name, :job, keyword_init: true)
+user = User.new job: 'hexlet'
+
+HexletCode.form_for user do |f|
+  f.input :name
+  f.input :job
+  f.submit
+end
+
+# <form action="#" method="post">
+#   <label for="name">Name</label>
+#   <input name="name" type="text">
+#   <label for="job">Job</label>
+#   <input name="job" type="text" value="hexlet">
+#   <input name="commit" type="submit" value="Save" >
+# </form>
+```
 
 ## Development
 
@@ -34,7 +118,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/hexlet_code.
+Bug reports and pull requests are welcome on GitHub at https://github.com/aydys/rails-project-lvl1.
 
 ## License
 
