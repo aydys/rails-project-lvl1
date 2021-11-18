@@ -6,3 +6,7 @@ require_relative 'fixtures/user'
 require_relative 'fixtures/html_tags'
 
 require 'minitest/autorun'
+
+def load_fixture(filename)
+  File.read("#{__dir__}/fixtures/#{filename}").delete("\n")
+end

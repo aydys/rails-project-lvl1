@@ -15,7 +15,7 @@ class HexletCodeTest < Minitest::Test
     form = HexletCode.form_for @user do |f|
       f.input :name
     end
-    expectation = Fixture::FORMS[:form]
+    expectation = load_fixture('form.html')
 
     assert_equal(expectation, form)
   end
@@ -24,7 +24,7 @@ class HexletCodeTest < Minitest::Test
     form = HexletCode.form_for @user do |f|
       f.input :name, class: 'user-name'
     end
-    expectation = Fixture::FORMS[:form_with_input]
+    expectation = load_fixture('form_with_input.html')
 
     assert_equal(expectation, form)
   end
@@ -33,7 +33,7 @@ class HexletCodeTest < Minitest::Test
     form = HexletCode.form_for @user do |f|
       f.input :job, as: :text
     end
-    expectation = Fixture::FORMS[:form_with_textarea]
+    expectation = load_fixture('form_with_textarea.html')
 
     assert_equal(expectation, form)
   end
@@ -42,7 +42,7 @@ class HexletCodeTest < Minitest::Test
     form = HexletCode.form_for @user do |f|
       f.input :job, as: :text, cols: 50, rows: 50
     end
-    expectation = Fixture::FORMS[:form_textarea_with_options]
+    expectation = load_fixture('form_textarea_with_option.html')
 
     assert_equal(expectation, form)
   end
@@ -63,7 +63,7 @@ class HexletCodeTest < Minitest::Test
       f.input :name
       f.submit 'Send'
     end
-    expectation = Fixture::FORMS[:form_with_submit_button]
+    expectation = load_fixture('form_with_submit_button.html')
 
     assert_equal(expectation, form)
   end
